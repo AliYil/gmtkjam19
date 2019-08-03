@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class Player extends GameObject {
+public class Player extends GameObject implements Collideable {
     public Rectangle boundingRectangle;
     private static final int width = 100;
     private static final int height = 100;
@@ -112,5 +112,15 @@ public class Player extends GameObject {
     public void shapeRender(ShapeRenderer shapeRenderer) {
         super.shapeRender(shapeRenderer);
         shapeRenderer.rect(boundingRectangle.x, boundingRectangle.y, boundingRectangle.width, boundingRectangle.height);
+    }
+
+    @Override
+    public boolean isStatic() {
+        return false;
+    }
+
+    @Override
+    public Rectangle getBoundingRectangle() {
+        return boundingRectangle;
     }
 }
