@@ -23,6 +23,7 @@ public abstract class LevelBase extends Screen {
     protected Player player;
     public LevelBase(Game game) {
         super(game);
+        zIndex = -10;
     }
 
     @Override
@@ -78,19 +79,34 @@ public abstract class LevelBase extends Screen {
                         Collideable collideable2 = (Collideable)entity2;
                         Rectangle intersection = new Rectangle();
                         if(Intersector.intersectRectangles(Utilities.enlargeRectangle(collideable1.getBoundingRectangle(), -1), Utilities.enlargeRectangle(collideable2.getBoundingRectangle(), -1), intersection)){
-                             Vector2 sub = collideable1.getPosVector().cpy().sub(collideable2.getPosVector()).nor().scl(1f);
+                             Vector2 sub = collideable1.getPosVector().cpy().sub(collideable2.getPosVector()).nor().scl(3f);
+                             int subDirection = (int)((sub.angle()+45) / 90);
                              if(!collideable1.isStatic() && !collideable2.isStatic()){
-                                 sub.scl(20f);
+                                 sub.scl(40f);
                              }else{
-                                 sub.setAngle((int)((sub.angle()+45) / 90) * 90);
+                                 sub.setAngle(subDirection * 90);
                              }
                              if(!collideable1.isStatic()){
                                  collideable1.getPosVector().add(sub);
-                                 collideable1.getSpeedVector().set(0, 0);
+//                                 collideable1.getSpeedVector().set(0, 0);
+//                                 collideable1.getSpeedVector().rotate(180);
+                                 if(subDirection == 0 || subDirection == 2){
+//                                     collideable1.getSpeedVector().scl(0, 1);
+                                 }
+                                 else{
+//                                     collideable1.getSpeedVector().scl(1, 0);
+                                 }
                              }
                              if(!collideable2.isStatic()){
                                  collideable2.getPosVector().sub(sub);
-                                 collideable2.getSpeedVector().set(0, 0);
+//                                 collideable2.getSpeedVector().set(0, 0);
+//                                 collideable2.getSpeedVector().rotate(180);
+                                 if(subDirection == 0 || subDirection == 2){
+                                     collideable1.getSpeedVector().scl(0, 1);
+                                 }
+                                 else{
+                                     collideable1.getSpeedVector().scl(1, 0);
+                                 }
                              }
 
                             collideable1.onCollide((GameObject) collideable2);

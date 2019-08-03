@@ -21,8 +21,13 @@ public class SpriteEntity extends GameObject {
     private Animation<TextureAtlas.AtlasRegion> animation;
     private int latestKeyframeIndex;
 
+    protected boolean flipHorizontal;
+    protected boolean flipVertical;
+
     public SpriteEntity(Game game, Texture texture) {
         super(game);
+        flipHorizontal = false;
+        flipVertical = false;
         sprite = new Sprite(texture);
         sprite.setOriginCenter();
         canAutoUpdateCenter = true;
@@ -30,14 +35,16 @@ public class SpriteEntity extends GameObject {
     }
 
     public SpriteEntity(Game game, float frameDuration, Array<TextureAtlas.AtlasRegion> textures) {
-        super(game);
+        super(game);;
+        flipHorizontal = false;
+        flipVertical = false;
         sprite = new Sprite(textures.get(0));
         sprite.setOriginCenter();
         canAutoUpdateCenter = true;
         aspectRatio = (float) textures.get(0).getRegionWidth() / (float) textures.get(0).getRegionHeight();
 
         animation = new Animation<TextureAtlas.AtlasRegion>(frameDuration, textures);
-        animation.setPlayMode(Animation.PlayMode.NORMAL);
+        animation.setPlayMode(Animation.PlayMode.LOOP);
         isAnimated = true;
         getSprite().setRegion(animation.getKeyFrame(0));
     }
@@ -78,57 +85,59 @@ public class SpriteEntity extends GameObject {
                     getSprite().setRegion(animation.getKeyFrame(stateTime));
                 }
             }
+            sprite.setFlip(flipHorizontal, flipVertical);
+            sprite.setOriginBasedPosition(getX(), getY());
             sprite.setColor(getColor());
             sprite.setAlpha(getAlpha());
             sprite.draw(batch);
         }
     }
 
-    public void setPosition(float x, float y) {
-        sprite.setPosition(
-                x - sprite.getOriginX(),
-                y - sprite.getOriginY());
-    }
-
-    @Override
-    public Vector2 getPosVector() {
-        return new Vector2(getX(), getY());
-    }
-
-    @Override
-    public float getY() {
-        return sprite.getY() + sprite.getOriginY();
-    }
-
-    @Override
-    public void setY(float y) {
-        sprite.setY(y - sprite.getOriginY());
-    }
-
-    @Override
-    public float getX() {
-        return sprite.getX() + sprite.getOriginX();
-    }
-
-    @Override
-    public void setX(float x) {
-        sprite.setX(x - sprite.getOriginX());
-    }
-
-    @Override
-    public void translateX(float x) {
-        sprite.translateX(x);
-    }
-
-    @Override
-    public void translateY(float y) {
-        sprite.translateY(y);
-    }
-
-    @Override
-    public void translate(float x, float y) {
-        sprite.translate(x, y);
-    }
+//    public void setPosition(float x, float y) {
+//        sprite.setPosition(
+//                x - sprite.getOriginX(),
+//                y - sprite.getOriginY());
+//    }
+//
+//    @Override
+//    public Vector2 getPosVector() {
+//        return new Vector2(getX(), getY());
+//    }
+//
+//    @Override
+//    public float getY() {
+//        return sprite.getY() + sprite.getOriginY();
+//    }
+//
+//    @Override
+//    public void setY(float y) {
+//        sprite.setY(y - sprite.getOriginY());
+//    }
+//
+//    @Override
+//    public float getX() {
+//        return sprite.getX() + sprite.getOriginX();
+//    }
+//
+//    @Override
+//    public void setX(float x) {
+//        sprite.setX(x - sprite.getOriginX());
+//    }
+//
+//    @Override
+//    public void translateX(float x) {
+//        sprite.translateX(x);
+//    }
+//
+//    @Override
+//    public void translateY(float y) {
+//        sprite.translateY(y);
+//    }
+//
+//    @Override
+//    public void translate(float x, float y) {
+//        sprite.translate(x, y);
+//    }
 
     //Resize without breaking aspect ratio
     public void resizeWidth(float width) {

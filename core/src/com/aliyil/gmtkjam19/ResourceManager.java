@@ -4,14 +4,18 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public final class ResourceManager {
     //Resources
     public BitmapFont bitmapFont;
 
 //    public Texture t;
+    public TextureAtlas albert;
 //
-//    public Sound s;
+    public Sound shotgun;
+    public Sound reload;
+    public Sound noAmmo;
 
     private Game gameInstance;
     private AssetManager assetManager;
@@ -27,9 +31,13 @@ public final class ResourceManager {
     void loadResources() {
         assetManager.load("fonts/font.fnt", BitmapFont.class);
 
+        assetManager.load("sprites/albert.atlas", TextureAtlas.class);
+
 //        assetManager.load("textures/.png", Texture.class);
 //
-//        assetManager.load("sounds/.wav", Sound.class);
+        assetManager.load("sounds/shotgun.wav", Sound.class);
+        assetManager.load("sounds/reload.ogg", Sound.class);
+        assetManager.load("sounds/noammo.wav", Sound.class);
 
         gameInstance.getParticleEffectManager().loadResources();
     }
@@ -43,8 +51,11 @@ public final class ResourceManager {
         bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 
 //        t = assetManager.get("textures/.png", Texture.class);
+        albert = assetManager.get("sprites/albert.atlas", TextureAtlas.class);
 
-//        s = assetManager.get("sounds/.wav", Sound.class);
+        shotgun = assetManager.get("sounds/shotgun.wav", Sound.class);
+        reload = assetManager.get("sounds/reload.ogg", Sound.class);
+        noAmmo = assetManager.get("sounds/noammo.wav", Sound.class);
     }
 
     void dispose() {

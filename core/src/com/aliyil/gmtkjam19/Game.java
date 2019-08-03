@@ -100,26 +100,6 @@ public class Game extends ApplicationAdapter {
 //        shapeRenderer.rect(0, 0, w, h);
 //        shapeRenderer.end();
 
-        spriteBatch.begin();
-        getParticleEffectManager().renderAllParticles(spriteBatch);
-        currentIterator = entities.listIterator();
-        while (currentIterator.hasNext()) {
-            Entity entity = currentIterator.next();
-            if (!entity.isLiving()) {
-                removeFromIterator();
-            } else if (entity.isRunning()) {
-                entity.tick();
-            }
-            if(entity instanceof GameObject){
-                 GameObject gameObject = (GameObject)entity;
-                if (gameObject.renderingEnabled)
-                    gameObject.render(spriteBatch);
-            }
-        }
-        currentIterator = null;
-        spriteBatch.end();
-
-        spriteBatch.setProjectionMatrix(camera.view);
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -139,7 +119,27 @@ public class Game extends ApplicationAdapter {
         shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
 
-        shapeRenderer.end();
+//        spriteBatch.setProjectionMatrix(camera.view);
+        spriteBatch.begin();
+        getParticleEffectManager().renderAllParticles(spriteBatch);
+        currentIterator = entities.listIterator();
+        while (currentIterator.hasNext()) {
+            Entity entity = currentIterator.next();
+            if (!entity.isLiving()) {
+                removeFromIterator();
+            } else if (entity.isRunning()) {
+                entity.tick();
+            }
+            if(entity instanceof GameObject){
+                 GameObject gameObject = (GameObject)entity;
+                if (gameObject.renderingEnabled)
+                    gameObject.render(spriteBatch);
+            }
+        }
+        currentIterator = null;
+        spriteBatch.end();
+
+
 
         //add entities in queue
         for (Entity entity : addQueue) {
