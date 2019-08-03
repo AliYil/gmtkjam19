@@ -13,7 +13,6 @@ public class BulletTail extends GameObject {
     public BulletTail(Game game, Bullet bullet) {
         super(game);
         this.bullet = bullet;
-//            speed.set(bullet.speed);
         start = new Vector2();
         end = null;
         enableMoving(true);

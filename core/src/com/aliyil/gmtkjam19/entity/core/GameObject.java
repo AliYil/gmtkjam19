@@ -64,6 +64,9 @@ public class GameObject extends Entity {
     public Vector2 getPosVector() {
         return pos;
     }
+    public Vector2 getSpeedVector() {
+        return speed;
+    }
 
     public float getY() {
         return pos.y;

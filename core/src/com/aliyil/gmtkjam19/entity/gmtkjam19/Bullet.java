@@ -1,7 +1,9 @@
 package com.aliyil.gmtkjam19.entity.gmtkjam19;
 
 import com.aliyil.gmtkjam19.Game;
+import com.aliyil.gmtkjam19.entity.core.Entity;
 import com.aliyil.gmtkjam19.entity.core.GameObject;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bullet extends GameObject {
@@ -28,13 +30,28 @@ public class Bullet extends GameObject {
         if(getPosVector().len() > 10000) kill();
         if(tail.getPosVector().cpy().sub(getPosVector()).len() > 1000)
             tail.speed.set(speed);
+
+
+        for (Entity entity : getGameInstance().getEntities()) {
+            if(entity instanceof Enemy){
+                Enemy enemy = (Enemy)entity;
+                if(Intersector.intersectSegmentRectangle(getPosVector(), getTail(), enemy.getBoundingRectangle())){
+                    enemy.kill();
+                }
+            }else if(entity instanceof Wall){
+                Wall wall = (Wall)entity;
+                if(Intersector.intersectSegmentRectangle(getPosVector(), getTail(), wall.getBoundingRectangle())){
+                    kill();
+                }
+            }
+        }
     }
 
     @Override
     public void stop() {
         super.stop();
         tail.end = getPosVector().cpy();
-//        tail.speed.set(speed);
+        tail.speed.set(speed);
     }
 
     public Vector2 getTail(){

@@ -30,14 +30,14 @@ public class Enemy extends GameObject implements Collideable {
         super.tick();
         boundingRectangle.setPosition(getX() - width/2f, getY() - height/2f);
 
-        for (Entity entity : getGameInstance().getEntities()) {
-            if(entity instanceof Bullet){
-                Bullet bullet = (Bullet)entity;
-                if(Intersector.intersectSegmentRectangle(bullet.getPosVector(), bullet.getTail(), boundingRectangle)){
-                    kill();
-                }
-            }
-        }
+//        for (Entity entity : getGameInstance().getEntities()) {
+//            if(entity instanceof Bullet){
+//                Bullet bullet = (Bullet)entity;
+//                if(Intersector.intersectSegmentRectangle(bullet.getPosVector(), bullet.getTail(), boundingRectangle)){
+//                    kill();
+//                }
+//            }
+//        }
     }
 
     @Override
