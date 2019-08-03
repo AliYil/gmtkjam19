@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 public class GameObject extends Entity {
-
     private Vector2 pos;
     public Vector2 speed;
     public Vector2 acceleration;

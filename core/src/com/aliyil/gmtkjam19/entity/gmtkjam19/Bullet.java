@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bullet extends GameObject {
-    private static final float travelSpeed = 8000;
+    private static final float travelSpeed = 10000;
     BulletTail tail;
     public Bullet(Game game, float angle) {
         super(game);
@@ -30,7 +30,6 @@ public class Bullet extends GameObject {
         if(getPosVector().len() > 10000) kill();
         if(tail.getPosVector().cpy().sub(getPosVector()).len() > 1000)
             tail.speed.set(speed);
-
 
         for (Entity entity : getGameInstance().getEntities()) {
             if(entity instanceof Enemy){

@@ -6,7 +6,7 @@ import com.aliyil.gmtkjam19.SharedValues;
 import com.badlogic.gdx.InputProcessor;
 
 public class Entity implements InputProcessor {
-    public int zIndex;
+    public int zIndex = 0;
     protected boolean isLiving;
     private boolean isRunning;
     private boolean isInputListener;

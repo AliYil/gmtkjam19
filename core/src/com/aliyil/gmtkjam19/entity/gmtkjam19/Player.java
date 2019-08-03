@@ -123,4 +123,9 @@ public class Player extends GameObject implements Collideable {
     public Rectangle getBoundingRectangle() {
         return boundingRectangle;
     }
+
+    @Override
+    public void onCollide(GameObject entity) {
+
+    }
 }

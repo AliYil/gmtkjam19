@@ -29,6 +29,6 @@ public class BulletTail extends GameObject {
     @Override
     public void shapeRender(ShapeRenderer shapeRenderer) {
         super.shapeRender(shapeRenderer);
-        shapeRenderer.rectLine(getPosVector(), bullet.isLiving() ? bullet.getPosVector() : end, 5);
+        shapeRenderer.rectLine(getPosVector(), bullet.isLiving() ? bullet.getPosVector() : end, 10);
     }
 }

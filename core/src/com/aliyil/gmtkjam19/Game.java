@@ -72,8 +72,7 @@ public class Game extends ApplicationAdapter {
         viewport.apply(false);
 
         getSharedValues().bgColor =
-                new Color(0.05f, 0.05f, 0.13f, 1f);
-//                new Color(0.7f, 0.7f, 0.7f, 1f);
+                new Color(0.47f, 0.85f, 1f, 1f);
 
         Entity inputCalc = new InputCalculator(this, viewport);
         inputCalc.start();
@@ -146,7 +145,7 @@ public class Game extends ApplicationAdapter {
         for (Entity entity : addQueue) {
             ListIterator<Entity> iterator = entities.listIterator();
             while (iterator.hasNext()) {
-                if (iterator.next().zIndex >= entity.zIndex)
+                if (iterator.next().zIndex > entity.zIndex)
                     break;
             }
             iterator.add(entity);
