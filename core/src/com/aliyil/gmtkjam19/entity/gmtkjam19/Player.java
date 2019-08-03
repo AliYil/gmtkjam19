@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player extends GameObject {
-    private Rectangle boundingRectangle;
+    public Rectangle boundingRectangle;
     private static final int width = 100;
     private static final int height = 100;
     private static final float moveSpeed = 750;
@@ -90,6 +90,7 @@ public class Player extends GameObject {
             Bullet bullet = new Bullet(getGameInstance(), angle);
             bullet.setPosition(getPosVector().cpy());
             bullet.start();
+            ammo = false;
         }
         return true;
     }
@@ -97,6 +98,14 @@ public class Player extends GameObject {
     @Override
     public void stop() {
         super.stop();
+    }
+
+    public void giveAmmo(){
+        ammo = true;
+    }
+
+    public boolean hasAmmo(){
+        return ammo;
     }
 
     @Override

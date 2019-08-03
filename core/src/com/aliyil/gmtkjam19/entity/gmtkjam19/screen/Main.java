@@ -5,8 +5,6 @@ import com.aliyil.gmtkjam19.entity.core.Screen;
 import com.aliyil.gmtkjam19.entity.core.Text;
 
 public class Main extends Screen {
-    private Text title;
-    private Text desc;
 
     public Main(Game game) {
         super(game);
@@ -15,16 +13,18 @@ public class Main extends Screen {
 
     @Override
     public void start() {
-        title = new Text(getGameInstance(), "RUN OR GUN");
+        Text title = new Text(getGameInstance(), "RUN OR GUN");
         title.setCentered(true);
         title.setPosition(0, 300);
         title.start();
+        screenEntitites.add(title);
 
         String descStr = "W, A, S, D to move\nMouse to aim\nLeft mouse click to shoot\nYou have one ammo!\n\nClick to start!";
-        desc = new Text(getGameInstance(), descStr);
+        Text desc = new Text(getGameInstance(), descStr);
         desc.setScale(0.4f);
         desc.setPosition(-400, 100);
         desc.start();
+        screenEntitites.add(desc);
 
         super.start();
     }
@@ -38,8 +38,6 @@ public class Main extends Screen {
     @Override
     public void stop() {
         super.stop();
-        title.kill();
-        desc.kill();
     }
 
 
