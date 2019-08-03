@@ -137,11 +137,11 @@ public class Text extends GameObject {
     }
 
     public float getCenterX() {
-        return getX() - glyphLayout.width / 2;
+        return getX() - (glyphLayout.width*baseScale) / 2;
     }
 
     public float getCenterY() {
-        return getY() + glyphLayout.height / 2;
+        return getY() + (glyphLayout.height*baseScale) / 2;
     }
 
     public float getDrawX() {

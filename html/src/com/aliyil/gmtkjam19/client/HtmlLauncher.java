@@ -1,11 +1,12 @@
 package com.aliyil.gmtkjam19.client;
 
+import com.aliyil.gmtkjam19.OsBridge;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
 import com.aliyil.gmtkjam19.Game;
 
-public class HtmlLauncher extends GwtApplication {
+public class HtmlLauncher extends GwtApplication implements OsBridge {
 
         // USE THIS CODE FOR A FIXED SIZE APPLICATION
         @Override
@@ -46,6 +47,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener createApplicationListener () {
-                return new Game();
+                return new Game(this);
         }
 }
