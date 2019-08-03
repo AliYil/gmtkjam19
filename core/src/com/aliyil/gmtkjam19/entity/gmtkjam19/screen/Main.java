@@ -3,7 +3,6 @@ package com.aliyil.gmtkjam19.entity.gmtkjam19.screen;
 import com.aliyil.gmtkjam19.Game;
 import com.aliyil.gmtkjam19.entity.core.Screen;
 import com.aliyil.gmtkjam19.entity.core.Text;
-import com.badlogic.gdx.Input;
 
 public class Main extends Screen {
     private Text title;

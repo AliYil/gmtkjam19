@@ -55,7 +55,6 @@ public class Player extends GameObject {
             }
             else if(!upPressed && rightPressed && downPressed && !leftPressed){
                 moveAngle.setAngle(315);
-
             }
             else if(!upPressed && !rightPressed && downPressed && !leftPressed){
                 moveAngle.setAngle(270);
@@ -81,79 +80,24 @@ public class Player extends GameObject {
             }
         }
         speed.limit(moveSpeed);
-//        if(leftPressed){
-//            acceleration.x = -accelerationSpeed;
-//        }
-//
-//        if(rightPressed){
-//            acceleration.x = accelerationSpeed;
-//        }
-//        if(upPressed){
-//            acceleration.y = -accelerationSpeed;
-//        }
-//
-//        if(upPressed){
-//            acceleration.y = accelerationSpeed;
-//        }
-//
-//        if(speed.x >= moveSpeed && acceleration.x > 0){
-//            acceleration.x = 0;
-//            speed.x = moveSpeed;
-//        }else if(speed.x <= -moveSpeed && acceleration.x < 0){
-//            acceleration.x = 0;
-//            speed.x = -moveSpeed;
-//        }
-//
-//        if(!leftPressed && !rightPressed){
-//            if(speed.x > 100f){
-//                acceleration.x = -accelerationSpeed;
-//            }else if(speed.x < -100f){
-//                acceleration.x = accelerationSpeed;
-//            }else{
-//                speed.x = 0;
-//                acceleration.x = 0;
-//            }
-//        }
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        super.touchDown(screenX, screenY, pointer, button);
+        if(ammo){
+            float angle = getSharedValues().touch.cpy().sub(getPosVector()).angle();
+            Bullet bullet = new Bullet(getGameInstance(), angle);
+            bullet.setPosition(getPosVector().cpy());
+            bullet.start();
+        }
+        return true;
     }
 
     @Override
     public void stop() {
         super.stop();
     }
-
-//    @Override
-//    public boolean keyDown(int keycode) {
-//        if(keycode == Input.Keys.W){
-//            speed.y = moveSpeed;
-//        }
-//        if(keycode == Input.Keys.S){
-//            speed.y = -moveSpeed;
-//        }
-//        if(keycode == Input.Keys.A){
-//            speed.x = -moveSpeed;
-//        }
-//        if(keycode == Input.Keys.D){
-//            speed.x = moveSpeed;
-//        }
-//        return super.keyDown(keycode);
-//    }
-//
-//    @Override
-//    public boolean keyUp(int keycode) {
-//        if(keycode == Input.Keys.W){
-//            speed.y = 0;
-//        }
-//        if(keycode == Input.Keys.S){
-//            speed.y = 0;
-//        }
-//        if(keycode == Input.Keys.A){
-//            speed.x = 0;
-//        }
-//        if(keycode == Input.Keys.D){
-//            speed.x = 0;
-//        }
-//        return super.keyUp(keycode);
-//    }
 
     @Override
     public void shapeRender(ShapeRenderer shapeRenderer) {
