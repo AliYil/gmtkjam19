@@ -26,7 +26,7 @@ public class Player extends SpriteEntity implements Collideable {
 //        zIndex = -1;
         enableMoving(true);
         boundingRectangle = new Rectangle(0, 0, width, height);
-        resizeWidth(120);
+        resizeWidth(90);
         getSprite().setOrigin(getSprite().getOriginX(), getSprite().getOriginY()-30f);
     }
 
@@ -143,7 +143,7 @@ public class Player extends SpriteEntity implements Collideable {
     @Override
     public void onCollide(GameObject entity) {
         if(entity instanceof Enemy){
-            updateHealth(-30);
+            updateHealth(-40);
         }
     }
 
@@ -169,7 +169,7 @@ public class Player extends SpriteEntity implements Collideable {
             shapeRenderer.setColor(new Color(0.5f, 0, 0, 0.5f));
             shapeRenderer.rectLine(healthBarPosStart, healthBarPosEnd, 20);
 
-            shapeRenderer.setColor(new Color(0.7f, 0.2f, 0.2f, 1f));
+            shapeRenderer.setColor(new Color(0.9f, 0.3f, 0.3f, 1f));
             shapeRenderer.rectLine(healthBarPosStart, healthBarPosStart.cpy().lerp(healthBarPosEnd, health/100f), 20);
         }
 

@@ -9,6 +9,7 @@ import com.aliyil.gmtkjam19.entity.core.Screen;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.AmmoPickup;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.Collideable;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.Enemy;
+import com.aliyil.gmtkjam19.entity.gmtkjam19.Floor;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.LevelComplete;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.LevelStartText;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.Player;
@@ -18,7 +19,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 
 public abstract class LevelBase extends Screen {
     public static final int tileSize = 100;
@@ -39,14 +39,15 @@ public abstract class LevelBase extends Screen {
                 new Color(0.47f, 0.85f, 1f, 1f);
         completed = false;
         player = new Player(getGameInstance());
+        player.setPosition(toWorldPos(getSpawnX(), getSpawnY()));
         player.start();
         screenEntitites.add(player);
 
         levelStartText = new LevelStartText(getGameInstance(), getLevelNumber());
         levelStartText.start();
 
-        for (int x = (getLevelWidth() / 2) * -1; x < getLevelWidth() / 2; x++) {
-            for (int y = (getLevelHeight() / 2) * -1; y < getLevelHeight() / 2; y++) {
+        for (int x = (getLevelWidth() / 2) * -1; x <= getLevelWidth() / 2; x++) {
+            for (int y = (getLevelHeight() / 2) * -1; y <= getLevelHeight() / 2; y++) {
                 if (tileHasWall(x, y)) {
                     Wall wall = new Wall(getGameInstance());
                     wall.setPosition(toWorldPos(x, y));
@@ -58,8 +59,8 @@ public abstract class LevelBase extends Screen {
                     floor.start();
                     screenEntitites.add(floor);
 
-                    if (Utilities.RANDOM.nextFloat() > 0.9f)
-                        floor.setColor(new Color(0.35f, 0.35f, 0.35f, 1f));
+//                    if (Utilities.RANDOM.nextFloat() > 0.9f)
+//                        floor.setColor(new Color(0.35f, 0.35f, 0.35f, 1f));
                 }
 
                 if (tileHasEnemy(x, y)) {
@@ -95,7 +96,7 @@ public abstract class LevelBase extends Screen {
                         if (Intersector.intersectRectangles(Utilities.enlargeRectangle(collideable1.getBoundingRectangle(), -1), Utilities.enlargeRectangle(collideable2.getBoundingRectangle(), -1), intersection)) {
                             Vector2 sub = collideable1.getPosVector().cpy().sub(collideable2.getPosVector()).nor().scl(3f);
                             int subDirection = (int) ((sub.angle() + 45) / 90);
-                            if (!collideable1.isStatic() && !collideable2.isStatic()) {
+                            if (!collideable1.isStatic() && !collideable2.isStatic() && !(collideable1 instanceof Enemy && collideable2 instanceof Enemy)) {
                                 sub.scl(20f);
                             } else {
                                 sub.setAngle(subDirection * 90);
@@ -164,9 +165,9 @@ public abstract class LevelBase extends Screen {
 
     public boolean tileHasWall(int x, int y) {
         if (x == (getLevelWidth() / 2) * -1) return true;
-        if (x == getLevelWidth() / 2 - 1) return true;
+        if (x == getLevelWidth() / 2) return true;
         if (y == (getLevelHeight() / 2) * -1) return true;
-        if (y == getLevelHeight() / 2 - 1) return true;
+        if (y == getLevelHeight() / 2) return true;
         return false;
     }
 
@@ -177,6 +178,9 @@ public abstract class LevelBase extends Screen {
     public boolean tileHasAmmo(int x, int y) {
         return false;
     }
+
+    public abstract int getSpawnX();
+    public abstract int getSpawnY();
 
     public abstract int getLevelWidth();
 

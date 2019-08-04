@@ -8,34 +8,42 @@ public class Level2 extends LevelBase {
     }
 
     @Override
-    public void start() {
-        super.start();
-    }
-
-    @Override
     public boolean tileHasWall(int x, int y) {
         return super.tileHasWall(x, y);
     }
 
     @Override
     public boolean tileHasEnemy(int x, int y) {
-        if(x == 2 && y == 2) return true;
+        if(x == 5 && y == 0) return true;
+        if(x == 4 && y == 0) return true;
+        if(x == 3 && y == 0) return true;
         return super.tileHasEnemy(x, y);
     }
 
     @Override
     public boolean tileHasAmmo(int x, int y) {
+        if(x == -5 && y == 0) return true;
         return super.tileHasAmmo(x, y);
     }
 
     @Override
+    public int getSpawnX() {
+        return -6;
+    }
+
+    @Override
+    public int getSpawnY() {
+        return 0;
+    }
+
+    @Override
     public int getLevelWidth() {
-        return 10;
+        return 15;
     }
 
     @Override
     public int getLevelHeight() {
-        return 10;
+        return 3;
     }
 
     @Override
@@ -45,6 +53,6 @@ public class Level2 extends LevelBase {
 
     @Override
     public void triggerNextLevel() {
-
+        new Level3(getGameInstance()).start();
     }
 }

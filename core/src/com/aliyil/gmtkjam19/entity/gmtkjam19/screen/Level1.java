@@ -10,19 +10,6 @@ public class Level1 extends LevelBase {
     @Override
     public void start() {
         super.start();
-//        Enemy enemy1 = new Enemy(getGameInstance(), player);
-//        enemy1.setPosition(-300, 300);
-//        enemy1.start();
-//        screenEntitites.add(enemy1);
-//        Enemy enemy2 = new Enemy(getGameInstance(), player);
-//        enemy2.setPosition(-400, 300);
-//        enemy2.start();
-//        screenEntitites.add(enemy2);
-//
-//        AmmoPickup ammo1 = new AmmoPickup(getGameInstance(), player);
-//        ammo1.setPosition(300, 300);
-//        ammo1.start();
-//        screenEntitites.add(ammo1);
     }
 
     @Override
@@ -32,25 +19,35 @@ public class Level1 extends LevelBase {
 
     @Override
     public boolean tileHasEnemy(int x, int y) {
-        if(x == -3 && y == 3) return true;
-        if(x == -4 && y == 3) return true;
+        if(x == 11 && y == 0) return true;
+        if(x == -11 && y == 0) return true;
         return super.tileHasEnemy(x, y);
     }
 
     @Override
     public boolean tileHasAmmo(int x, int y) {
-        if(x == 3 && y == 3) return true;
+        if(x == 3 && y == 0) return true;
         return super.tileHasAmmo(x, y);
     }
 
     @Override
+    public int getSpawnX() {
+        return 0;
+    }
+
+    @Override
+    public int getSpawnY() {
+        return 0;
+    }
+
+    @Override
     public int getLevelWidth() {
-        return 20;
+        return 27;
     }
 
     @Override
     public int getLevelHeight() {
-        return 20;
+        return 10;
     }
 
     @Override

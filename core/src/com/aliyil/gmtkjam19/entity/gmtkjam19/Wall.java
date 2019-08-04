@@ -7,8 +7,8 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Wall extends TileBase implements Collideable {
     public Wall(Game game) {
-        super(game);
-        setColor(Color.DARK_GRAY);
+        super(game, game.getResourceManager().wall);
+//        setColor(Color.DARK_GRAY);
     }
     @Override
     public boolean isStatic() {

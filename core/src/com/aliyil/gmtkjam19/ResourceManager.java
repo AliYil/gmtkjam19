@@ -11,6 +11,10 @@ public final class ResourceManager {
     public BitmapFont bitmapFont;
 
     public Texture logo;
+    public Texture floor;
+    public Texture floor2;
+    public Texture wall;
+    public Texture ammo;
     public TextureAtlas albert;
     public TextureAtlas zombie;
 //
@@ -36,6 +40,10 @@ public final class ResourceManager {
         assetManager.load("sprites/zombieframes.atlas", TextureAtlas.class);
 
         assetManager.load("sprites/logo.png", Texture.class);
+        assetManager.load("sprites/floor.png", Texture.class);
+        assetManager.load("sprites/floor2.png", Texture.class);
+        assetManager.load("sprites/wall.png", Texture.class);
+        assetManager.load("sprites/ammo.png", Texture.class);
 //
         assetManager.load("sounds/shotgun.wav", Sound.class);
         assetManager.load("sounds/reload.ogg", Sound.class);
@@ -53,6 +61,11 @@ public final class ResourceManager {
         bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 
         logo = assetManager.get("sprites/logo.png", Texture.class);
+        floor = assetManager.get("sprites/floor.png", Texture.class);
+        floor2 = assetManager.get("sprites/floor2.png", Texture.class);
+        wall = assetManager.get("sprites/wall.png", Texture.class);
+        ammo = assetManager.get("sprites/ammo.png", Texture.class);
+
         albert = assetManager.get("sprites/albert.atlas", TextureAtlas.class);
         zombie = assetManager.get("sprites/zombieframes.atlas", TextureAtlas.class);
 

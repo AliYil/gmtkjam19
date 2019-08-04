@@ -4,14 +4,13 @@ import com.aliyil.gmtkjam19.Game;
 import com.aliyil.gmtkjam19.Utilities;
 import com.aliyil.gmtkjam19.entity.core.GameObject;
 import com.aliyil.gmtkjam19.entity.core.SpriteEntity;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Enemy extends SpriteEntity implements Collideable {
     private Rectangle boundingRectangle;
-    private static final int width = 100;
-    private static final int height = 100;
-    private static final float moveSpeed = 350;
+    private static final int width = 60;
+    private static final int height = 90;
+    private static final float moveSpeed = 450;
     private Player player;
 
     private float behaviourTime;
@@ -24,7 +23,8 @@ public class Enemy extends SpriteEntity implements Collideable {
         enableMoving(true);
         boundingRectangle = new Rectangle(0, 0, width, height);
 //        zIndex = -1;
-        resizeWidth(120);
+        resizeWidth(95);
+        getSprite().setOrigin(getSprite().getOriginX(), getSprite().getOriginY()-10f);
     }
 
     @Override
