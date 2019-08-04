@@ -57,7 +57,6 @@ public class Enemy extends SpriteEntity implements Collideable {
         if((moveAngle <= 90 && moveAngle >= 0) || (moveAngle >= 270 && moveAngle <= 360))
             flipHorizontal = true;
         else flipHorizontal = false;
-        Gdx.app.log("" + moveAngle, "");
         speed.set(0, moveSpeed);
         speed.setAngle(moveAngle);
 

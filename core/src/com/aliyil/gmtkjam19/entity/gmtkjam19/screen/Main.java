@@ -2,7 +2,9 @@ package com.aliyil.gmtkjam19.entity.gmtkjam19.screen;
 
 import com.aliyil.gmtkjam19.Game;
 import com.aliyil.gmtkjam19.entity.core.Screen;
+import com.aliyil.gmtkjam19.entity.core.SpriteEntity;
 import com.aliyil.gmtkjam19.entity.core.Text;
+import com.badlogic.gdx.graphics.Color;
 
 public class Main extends Screen {
 
@@ -13,8 +15,9 @@ public class Main extends Screen {
 
     @Override
     public void start() {
-        Text title = new Text(getGameInstance(), "RUN OR GUN");
-        title.setCentered(true);
+        getSharedValues().bgColor = Color.GRAY.cpy();
+        SpriteEntity title = new SpriteEntity(getGameInstance(), getGameInstance().getResourceManager().logo);
+        title.resizeWidth(1000);
         title.setPosition(0, 300);
         title.start();
         screenEntitites.add(title);

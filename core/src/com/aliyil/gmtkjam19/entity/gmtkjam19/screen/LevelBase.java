@@ -35,6 +35,8 @@ public abstract class LevelBase extends Screen {
     @Override
     public void start() {
         super.start();
+        getSharedValues().bgColor =
+                new Color(0.47f, 0.85f, 1f, 1f);
         completed = false;
         player = new Player(getGameInstance());
         player.start();
