@@ -15,7 +15,7 @@ public abstract class Screen extends Entity {
     @Override
     public void start() {
         super.start();
-        getGameInstance().getCamera().position.set(0, 0, 0);
+        getSharedValues().cameraPos.set(0, 0);
         if (getGameInstance().getCurrentScreen() != null && getGameInstance().getCurrentScreen().isLiving() && getGameInstance().getCurrentScreen() != this)
             getGameInstance().getCurrentScreen().kill();
         getGameInstance().setCurrentScreen(this);

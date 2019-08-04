@@ -12,6 +12,7 @@ public final class ResourceManager {
 
 //    public Texture t;
     public TextureAtlas albert;
+    public TextureAtlas zombie;
 //
     public Sound shotgun;
     public Sound reload;
@@ -32,6 +33,7 @@ public final class ResourceManager {
         assetManager.load("fonts/font.fnt", BitmapFont.class);
 
         assetManager.load("sprites/albert.atlas", TextureAtlas.class);
+        assetManager.load("sprites/zombieframes.atlas", TextureAtlas.class);
 
 //        assetManager.load("textures/.png", Texture.class);
 //
@@ -52,6 +54,7 @@ public final class ResourceManager {
 
 //        t = assetManager.get("textures/.png", Texture.class);
         albert = assetManager.get("sprites/albert.atlas", TextureAtlas.class);
+        zombie = assetManager.get("sprites/zombieframes.atlas", TextureAtlas.class);
 
         shotgun = assetManager.get("sounds/shotgun.wav", Sound.class);
         reload = assetManager.get("sounds/reload.ogg", Sound.class);
