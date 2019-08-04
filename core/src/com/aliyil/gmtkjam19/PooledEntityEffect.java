@@ -7,6 +7,7 @@ public class PooledEntityEffect {
     ParticleEffectPool.PooledEffect effect;
     GameObject parentGameObject;
     boolean respectPause = false;
+    public boolean draw = true;
 
     public PooledEntityEffect(ParticleEffectPool.PooledEffect effect) {
         this.effect = effect;

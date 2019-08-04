@@ -1,6 +1,7 @@
 package com.aliyil.gmtkjam19.entity.gmtkjam19;
 
 import com.aliyil.gmtkjam19.Game;
+import com.aliyil.gmtkjam19.PooledEntityEffect;
 import com.aliyil.gmtkjam19.entity.core.SpriteEntity;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
@@ -13,6 +14,7 @@ public class AmmoPickup extends SpriteEntity {
     private Player player;
 
     private float cooldown;
+    private PooledEntityEffect particleEffect = null;
 
     public AmmoPickup(Game game, Player player) {
         super(game, game.getResourceManager().ammo);
@@ -25,6 +27,7 @@ public class AmmoPickup extends SpriteEntity {
     public void start() {
         super.start();
         cooldown = 0;
+        particleEffect = getGameInstance().getParticleEffectManager().newGrowingCircle(this);
     }
 
     @Override
@@ -34,8 +37,10 @@ public class AmmoPickup extends SpriteEntity {
         if(cooldown > 0){
             cooldown -= dts();
             setAlpha(0.4f);
+            particleEffect.draw = false;
         }else{
             setAlpha(1);
+            particleEffect.draw = true;
         }
         if(!player.hasAmmo() && cooldown <= 0){
             if(Intersector.intersectRectangles(player.boundingRectangle, boundingRectangle, new Rectangle())){

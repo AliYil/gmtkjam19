@@ -47,7 +47,7 @@ public class Level1 extends LevelBase {
 
     @Override
     public int getLevelHeight() {
-        return 10;
+        return 9;
     }
 
     @Override

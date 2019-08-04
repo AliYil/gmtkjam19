@@ -106,6 +106,12 @@ public class Enemy extends SpriteEntity implements Collideable {
         }
     }
 
+    @Override
+    public void kill() {
+        super.kill();
+        getGameInstance().getParticleEffectManager().newZombieDamage(getX(), getY());
+    }
+
     private enum Behaviour{
         Wander,
         Follow

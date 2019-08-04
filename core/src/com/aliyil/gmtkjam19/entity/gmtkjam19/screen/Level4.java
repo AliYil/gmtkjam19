@@ -36,19 +36,26 @@ public class Level4 extends LevelBase {
         if(x == 0 && y == 4) return true;
         if(x == -1 && y == 4) return true;
         if(x == -2 && y == 4) return true;
+
+        if(x == 2 && y == 6) return true;
+        if(x == 1 && y == 6) return true;
+        if(x == 0 && y == 6) return true;
+        if(x == -1 && y == 6) return true;
+        if(x == -2 && y == 6) return true;
+        if(x == -3 && y == 6) return true;
         return super.tileHasWall(x, y);
     }
 
     @Override
     public boolean tileHasEnemy(int x, int y) {
         if(x == 0 && y == -5) return true;
-        if(x == 0 && y == 3) return true;
+        if(x == 0 && y == 5) return true;
         return super.tileHasEnemy(x, y);
     }
 
     @Override
     public boolean tileHasAmmo(int x, int y) {
-        if(x == 0 && y == 7) return true;
+        if(x == 0 && y == 8) return true;
         return super.tileHasAmmo(x, y);
     }
 

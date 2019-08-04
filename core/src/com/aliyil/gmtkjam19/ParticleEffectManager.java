@@ -1,6 +1,11 @@
 package com.aliyil.gmtkjam19;
 
+import com.aliyil.gmtkjam19.entity.core.Entity;
+import com.aliyil.gmtkjam19.entity.core.GameObject;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.utils.Array;
 
@@ -9,7 +14,8 @@ public class ParticleEffectManager {
     private Array<PooledEntityEffect> effects;
     private Game gameInstance;
 
-//    private ParticleEffectPool growingCirclePool;
+    private ParticleEffectPool growingCirclePool;
+    private ParticleEffectPool zombieDamagePool;
 
     public ParticleEffectManager(Game gameInstance) {
         this.gameInstance = gameInstance;
@@ -24,7 +30,9 @@ public class ParticleEffectManager {
                     entityEffect.effect.setPosition(entityEffect.parentGameObject.getX(), entityEffect.parentGameObject.getY());
                 }
             }
-            entityEffect.effect.draw(batch, entityEffect.respectPause ? gameInstance.sharedValues.paused ? 0 : S.dts(gameInstance.sharedValues.gameSpeed) : S.dts(gameInstance.sharedValues.gameSpeed));
+
+            if(entityEffect.draw)
+                entityEffect.effect.draw(batch, entityEffect.respectPause ? gameInstance.sharedValues.paused ? 0 : S.dts(gameInstance.sharedValues.gameSpeed) : S.dts(gameInstance.sharedValues.gameSpeed));
 
             if (!entityEffect.effect.getEmitters().first().isContinuous() && entityEffect.effect.isComplete()) {
                 effects.removeValue(entityEffect, true);
@@ -36,11 +44,17 @@ public class ParticleEffectManager {
     public void loadResources() {
         effects = new Array<PooledEntityEffect>();
 
-//        ParticleEffect growingCircle = new ParticleEffect();
-//        growingCircle.load(Gdx.files.internal("particles/growingcircle.p"), Gdx.files.internal("textures"));
-//        growingCircle.start();
-//        growingCircle.scaleEffect(1f);
-//        growingCirclePool = new ParticleEffectPool(growingCircle, 10, 100);
+        ParticleEffect growingCircle = new ParticleEffect();
+        growingCircle.load(Gdx.files.internal("particles/circles.p"), Gdx.files.internal("sprites"));
+        growingCircle.start();
+        growingCircle.scaleEffect(5f);
+        growingCirclePool = new ParticleEffectPool(growingCircle, 10, 100);
+
+        ParticleEffect zombieDamage = new ParticleEffect();
+        zombieDamage.load(Gdx.files.internal("particles/zombiedamage.p"), Gdx.files.internal("sprites"));
+        zombieDamage.start();
+        zombieDamage.scaleEffect(1f);
+        zombieDamagePool = new ParticleEffectPool(zombieDamage, 10, 100);
     }
 
     public void releaseResources() {
@@ -57,12 +71,20 @@ public class ParticleEffectManager {
     }
 
     //Should call setCountinuous(true) for all continuous particles
-//
-//    public void newGrowingCircle(float x, float y, float alpha) {
-//        ParticleEffectPool.PooledEffect pooledEffect = growingCirclePool.obtain();
-//        pooledEffect.setPosition(x, y);
-//        pooledEffect.getEmitters().first().getTransparency().setHigh(alpha);
-//        PooledEntityEffect entityEffect = new PooledEntityEffect(pooledEffect);
-//        effects.add(entityEffect);
-//    }
+    public PooledEntityEffect newGrowingCircle(GameObject gameObject) {
+        ParticleEffectPool.PooledEffect effect = growingCirclePool.obtain();
+        effect.getEmitters().first().setContinuous(true);
+        PooledEntityEffect peffect = new PooledEntityEffect(effect);
+        peffect.parentGameObject = gameObject;
+        peffect.respectPause = true;
+        effects.add(peffect);
+        return peffect;
+    }
+
+    public void newZombieDamage(float x, float y) {
+        ParticleEffectPool.PooledEffect effect = zombieDamagePool.obtain();
+        effect.setPosition(x, y);
+        PooledEntityEffect peffect = new PooledEntityEffect(effect);
+        effects.add(peffect);
+    }
 }

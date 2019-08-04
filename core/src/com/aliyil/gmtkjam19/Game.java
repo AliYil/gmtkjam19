@@ -67,7 +67,7 @@ public class Game extends ApplicationAdapter {
         resourceManager.loadResources();
         camera = new OrthographicCamera();
         camera.position.set(0, 0, 0);
-//        camera.zoom = 4f;
+        camera.zoom = 1.3f;
         viewport = new FitViewport(w, h, camera);
         viewport.apply(false);
 
@@ -101,7 +101,6 @@ public class Game extends ApplicationAdapter {
 //        shapeRenderer.end();
 
         spriteBatch.begin();
-        getParticleEffectManager().renderAllParticles(spriteBatch);
         currentIterator = entities.listIterator();
         while (currentIterator.hasNext()) {
             Entity entity = currentIterator.next();
@@ -117,6 +116,7 @@ public class Game extends ApplicationAdapter {
             }
         }
         currentIterator = null;
+        getParticleEffectManager().renderAllParticles(spriteBatch);
         spriteBatch.end();
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
