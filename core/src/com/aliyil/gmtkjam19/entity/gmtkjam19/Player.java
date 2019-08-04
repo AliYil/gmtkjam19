@@ -20,6 +20,7 @@ public class Player extends SpriteEntity implements Collideable {
     private float health;
 
     private boolean ammo;
+    private AmmoIndicator ammoIndicator;
     public Player(Game game) {
         super(game, 0.15f, game.getResourceManager().albert.getRegions());
         enableInputListener(0);
@@ -35,13 +36,14 @@ public class Player extends SpriteEntity implements Collideable {
         super.start();
         ammo = true;
         health = 100f;
+        ammoIndicator = new AmmoIndicator(getGameInstance());
+        ammoIndicator.start();
     }
 
     @Override
     public void tick() {
         super.tick();
         updateRectangle();
-
 
         boolean upPressed = Gdx.input.isKeyPressed(Input.Keys.W);
         boolean rightPressed = Gdx.input.isKeyPressed(Input.Keys.D);
@@ -97,6 +99,13 @@ public class Player extends SpriteEntity implements Collideable {
             getSprite().setRegion(getAnimation().getKeyFrame(0.16f));
         }
         speed.limit(moveSpeed);
+
+        if(ammo){
+            ammoIndicator.renderingEnabled = true;
+            ammoIndicator.setPosition(getPosVector().cpy().add(0, 120));
+        }else{
+            ammoIndicator.renderingEnabled = false;
+        }
     }
 
     @Override
@@ -119,6 +128,7 @@ public class Player extends SpriteEntity implements Collideable {
     @Override
     public void stop() {
         super.stop();
+        ammoIndicator.kill();
     }
 
     public void giveAmmo(){
