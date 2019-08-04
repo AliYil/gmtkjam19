@@ -29,6 +29,12 @@ public class Main extends Screen {
         desc.start();
         screenEntitites.add(desc);
 
+        Text desc2 = new Text(getGameInstance(), "Ver." + Game.ver);
+        desc2.setScale(0.2f);
+        desc2.setPosition(-400, -300);
+        desc2.start();
+        screenEntitites.add(desc2);
+
         super.start();
     }
 

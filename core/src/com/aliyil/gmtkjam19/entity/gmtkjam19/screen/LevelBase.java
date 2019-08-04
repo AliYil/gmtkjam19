@@ -101,21 +101,16 @@ public abstract class LevelBase extends Screen {
                                 sub.scl(20f);
                             } else {
                                 sub.setAngle(subDirection * 90);
+                                sub.scl(3f);
                             }
                             if (!collideable1.isStatic()) {
                                 collideable1.getPosVector().add(sub);
-//                                 collideable1.getSpeedVector().set(0, 0);
-//                                 collideable1.getSpeedVector().rotate(180);
                                 if (subDirection == 0 || subDirection == 2) {
-//                                     collideable1.getSpeedVector().scl(0, 1);
                                 } else {
-//                                     collideable1.getSpeedVector().scl(1, 0);
                                 }
                             }
                             if (!collideable2.isStatic()) {
                                 collideable2.getPosVector().sub(sub);
-//                                 collideable2.getSpeedVector().set(0, 0);
-//                                 collideable2.getSpeedVector().rotate(180);
                                 if (subDirection == 0 || subDirection == 2) {
                                     collideable1.getSpeedVector().scl(0, 1);
                                 } else {
