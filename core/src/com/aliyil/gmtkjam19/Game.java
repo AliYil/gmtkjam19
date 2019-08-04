@@ -78,6 +78,8 @@ public class Game extends ApplicationAdapter {
         new LoadingScreen(this).start();
         Gdx.input.setCatchBackKey(true);
         getSharedValues().gameElapsed = 0;
+
+        Gdx.input.setCursorCatched(false);
     }
 
     @Override

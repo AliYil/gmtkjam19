@@ -4,7 +4,6 @@ package com.aliyil.gmtkjam19.entity.core.screen;
 
 import com.aliyil.gmtkjam19.Game;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.screen.Main;
-import com.aliyil.gmtkjam19.entity.core.DebugInfoText;
 import com.aliyil.gmtkjam19.entity.core.LoadingBar;
 import com.aliyil.gmtkjam19.entity.core.Screen;
 
@@ -35,8 +34,8 @@ public class LoadingScreen extends Screen {
             getGameInstance().getResourceManager().finishLoading();
 
             new Main(getGameInstance()).start();
-            if (Game.devMode)
-                new DebugInfoText(getGameInstance()).start();
+//            if (Game.devMode)
+//                new DebugInfoText(getGameInstance()).start();
         }
     }
 

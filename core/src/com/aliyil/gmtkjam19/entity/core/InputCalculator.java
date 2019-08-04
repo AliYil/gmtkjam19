@@ -1,6 +1,7 @@
 package com.aliyil.gmtkjam19.entity.core;
 
 import com.aliyil.gmtkjam19.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -11,6 +12,12 @@ public class InputCalculator extends Entity {
         super(game);
         this.viewport = viewport;
         enableInputListener(-100);
+    }
+
+    @Override
+    public void tick() {
+        viewport.unproject(getSharedValues().touch.set(Gdx.input.getX(), Gdx.input.getY()));
+        super.tick();
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.aliyil.gmtkjam19.entity.core.GameObject;
 import com.aliyil.gmtkjam19.entity.core.Screen;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.AmmoPickup;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.Collideable;
+import com.aliyil.gmtkjam19.entity.gmtkjam19.Crosshair;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.Enemy;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.Floor;
 import com.aliyil.gmtkjam19.entity.gmtkjam19.LevelComplete;

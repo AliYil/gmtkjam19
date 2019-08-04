@@ -16,6 +16,7 @@ public final class ResourceManager {
     public Texture wall;
     public Texture ammo;
     public Texture circle;
+    public Texture crosshair;
     public TextureAtlas albert;
     public TextureAtlas zombie;
 //
@@ -46,6 +47,7 @@ public final class ResourceManager {
         assetManager.load("sprites/wall.png", Texture.class);
         assetManager.load("sprites/ammo.png", Texture.class);
         assetManager.load("sprites/circle.png", Texture.class);
+        assetManager.load("sprites/crosshair.png", Texture.class);
         assetManager.load("sprites/plain.png", Texture.class);
 //
         assetManager.load("sounds/shotgun.wav", Sound.class);
@@ -69,6 +71,7 @@ public final class ResourceManager {
         wall = assetManager.get("sprites/wall.png", Texture.class);
         ammo = assetManager.get("sprites/ammo.png", Texture.class);
         circle = assetManager.get("sprites/circle.png", Texture.class);
+        crosshair = assetManager.get("sprites/crosshair.png", Texture.class);
 
         albert = assetManager.get("sprites/albert.atlas", TextureAtlas.class);
         zombie = assetManager.get("sprites/zombieframes.atlas", TextureAtlas.class);

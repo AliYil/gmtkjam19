@@ -21,6 +21,7 @@ public class Player extends SpriteEntity implements Collideable {
 
     private boolean ammo;
     private AmmoIndicator ammoIndicator;
+    private Crosshair crosshair;
     public Player(Game game) {
         super(game, 0.15f, game.getResourceManager().albert.getRegions());
         enableInputListener(0);
@@ -38,6 +39,9 @@ public class Player extends SpriteEntity implements Collideable {
         health = 100f;
         ammoIndicator = new AmmoIndicator(getGameInstance());
         ammoIndicator.start();
+
+        crosshair = new Crosshair(getGameInstance());
+        crosshair.start();
     }
 
     @Override
@@ -101,9 +105,11 @@ public class Player extends SpriteEntity implements Collideable {
         speed.limit(moveSpeed);
 
         if(ammo){
+            crosshair.renderingEnabled = true;
             ammoIndicator.renderingEnabled = true;
             ammoIndicator.setPosition(getPosVector().cpy().add(0, 120));
         }else{
+            crosshair.renderingEnabled = false;
             ammoIndicator.renderingEnabled = false;
         }
     }
@@ -129,6 +135,7 @@ public class Player extends SpriteEntity implements Collideable {
     public void stop() {
         super.stop();
         ammoIndicator.kill();
+        crosshair.kill();
     }
 
     public void giveAmmo(){
