@@ -28,6 +28,7 @@ public class Text extends GameObject {
         font = new BitmapFont(font.getData(), font.getRegion(), false);
         setText(text);
         setStatic(false);
+        zIndex = 2;
     }
 
     @Override

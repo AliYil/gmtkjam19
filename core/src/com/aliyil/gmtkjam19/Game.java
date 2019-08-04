@@ -89,6 +89,7 @@ public class Game extends ApplicationAdapter {
                 | GL20.GL_DEPTH_BUFFER_BIT
                 | (Gdx.graphics.getBufferFormat().coverageSampling ? GL20.GL_COVERAGE_BUFFER_BIT_NV : 0));
 
+        camera.position.set(getSharedValues().cameraPos.x + getSharedValues().cameraPosSecondary.x, getSharedValues().cameraPos.y + getSharedValues().cameraPosSecondary.y, 0);
         camera.update();
 
         spriteBatch.setProjectionMatrix(camera.combined);
@@ -138,8 +139,6 @@ public class Game extends ApplicationAdapter {
         }
         currentIterator = null;
         spriteBatch.end();
-
-
 
         //add entities in queue
         for (Entity entity : addQueue) {

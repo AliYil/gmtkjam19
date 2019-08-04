@@ -10,4 +10,5 @@ public interface Collideable {
     Vector2 getPosVector();
     Vector2 getSpeedVector();
     void onCollide(GameObject entity);
+    void updateRectangle();
 }

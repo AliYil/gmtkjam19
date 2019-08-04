@@ -49,7 +49,7 @@ public class SpriteEntity extends GameObject {
         getSprite().setRegion(animation.getKeyFrame(0));
     }
 
-    public Animation getAnimation() {
+    public Animation<TextureAtlas.AtlasRegion> getAnimation() {
         if (isAnimated)
             return animation;
         else

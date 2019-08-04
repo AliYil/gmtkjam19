@@ -5,14 +5,14 @@ import com.aliyil.gmtkjam19.entity.core.GameObject;
 import com.aliyil.gmtkjam19.entity.core.SpriteEntity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player extends SpriteEntity implements Collideable {
     public Rectangle boundingRectangle;
-    private static final int width = 100;
+    private static final int width = 50;
     private static final int height = 100;
     private static final float moveSpeed = 550;
     private static final float accelerationSpeed = 10000;
@@ -23,9 +23,11 @@ public class Player extends SpriteEntity implements Collideable {
     public Player(Game game) {
         super(game, 0.15f, game.getResourceManager().albert.getRegions());
         enableInputListener(0);
+//        zIndex = -1;
         enableMoving(true);
         boundingRectangle = new Rectangle(0, 0, width, height);
         resizeWidth(120);
+        getSprite().setOrigin(getSprite().getOriginX(), getSprite().getOriginY()-30f);
     }
 
     @Override
@@ -38,7 +40,7 @@ public class Player extends SpriteEntity implements Collideable {
     @Override
     public void tick() {
         super.tick();
-        boundingRectangle.setPosition(getX() - width/2f, getY() - height/2f);
+        updateRectangle();
 
 
         boolean upPressed = Gdx.input.isKeyPressed(Input.Keys.W);
@@ -92,6 +94,7 @@ public class Player extends SpriteEntity implements Collideable {
                 acceleration.set(0, 0);
             }
             isAnimating = false;
+            getSprite().setRegion(getAnimation().getKeyFrame(0.16f));
         }
         speed.limit(moveSpeed);
     }
@@ -102,10 +105,11 @@ public class Player extends SpriteEntity implements Collideable {
         if(ammo){
             float angle = getSharedValues().touch.cpy().sub(getPosVector()).angle();
             Bullet bullet = new Bullet(getGameInstance(), angle);
-            bullet.setPosition(getPosVector().cpy());
+            bullet.setPosition(getPosVector().cpy().add(0, 30f));
             bullet.start();
             ammo = false;
             getGameInstance().getSoundManager().shotgun();
+            new ScreenShake(getGameInstance()).start();
         }else{
             getGameInstance().getSoundManager().noAmmo();
         }
@@ -138,6 +142,37 @@ public class Player extends SpriteEntity implements Collideable {
 
     @Override
     public void onCollide(GameObject entity) {
+        if(entity instanceof Enemy){
+            updateHealth(-30);
+        }
+    }
 
+    @Override
+    public void updateRectangle() {
+        boundingRectangle.setPosition(getX() - width/2f, getY() - height/2f);
+    }
+
+    private void updateHealth(int difference){
+        health += difference;
+        if(health <= 0){
+            kill();
+        }
+    }
+
+    @Override
+    public void shapeRender(ShapeRenderer shapeRenderer) {
+        if(health < 100){
+            Vector2 healthBarPos = getPosVector().cpy().add(0, 150);
+            Vector2 healthBarPosStart = healthBarPos.cpy().add(-75, 0);
+            Vector2 healthBarPosEnd = healthBarPos.cpy().add(75, 0);
+
+            shapeRenderer.setColor(new Color(0.5f, 0, 0, 0.5f));
+            shapeRenderer.rectLine(healthBarPosStart, healthBarPosEnd, 20);
+
+            shapeRenderer.setColor(new Color(0.7f, 0.2f, 0.2f, 1f));
+            shapeRenderer.rectLine(healthBarPosStart, healthBarPosStart.cpy().lerp(healthBarPosEnd, health/100f), 20);
+        }
+
+        super.shapeRender(shapeRenderer);
     }
 }

@@ -24,6 +24,7 @@ public class Enemy extends GameObject implements Collideable {
         enableMoving(true);
         boundingRectangle = new Rectangle(0, 0, width, height);
         setColor(Color.BROWN);
+//        zIndex = -1;
     }
 
     @Override
@@ -71,7 +72,10 @@ public class Enemy extends GameObject implements Collideable {
                 behaviour = Behaviour.Wander;
             behaviourTime = 0;
         }
+        updateRectangle();
+    }
 
+    public void updateRectangle(){
         boundingRectangle.setPosition(getX() - width/2f, getY() - height/2f);
     }
 

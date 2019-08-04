@@ -16,12 +16,16 @@ public class TileBase extends GameObject {
     @Override
     public void tick() {
         super.tick();
-        boundingRectangle.setPosition(getX() - LevelBase.tileSize/2f, getY() - LevelBase.tileSize/2f);
+        updateRectangle();
     }
 
     @Override
     public void shapeRender(ShapeRenderer shapeRenderer) {
         super.shapeRender(shapeRenderer);
         shapeRenderer.rect(boundingRectangle.x, boundingRectangle.y, boundingRectangle.width, boundingRectangle.height);
+    }
+
+    public void updateRectangle(){
+        boundingRectangle.setPosition(getX() - LevelBase.tileSize/2f, getY() - LevelBase.tileSize/2f);
     }
 }
