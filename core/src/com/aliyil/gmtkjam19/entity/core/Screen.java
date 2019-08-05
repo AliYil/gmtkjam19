@@ -24,7 +24,8 @@ public abstract class Screen extends Entity {
     @Override
     public void stop() {
         for (Entity screenEntity : screenEntitites) {
-            screenEntity.kill();
+            if(screenEntity.isLiving())
+                screenEntity.kill();
         }
         super.stop();
     }
