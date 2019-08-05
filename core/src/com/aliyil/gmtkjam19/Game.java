@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class Game extends ApplicationAdapter {
-    public static final String ver = "0.0.2";
+    public static final String ver = "0.0.3";
     //Width units
     public static final int w = 1920;
     //Height units
